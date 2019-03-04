@@ -5,7 +5,7 @@
  - Docker is an abstraction layer, sitting above the Host OS layer.
  - It leverages your native OS kernel, instead of running a "Guest OS" as you would on a Virtual Machine.
  - It is the encapsulation of an environment . Usually referenced as "Containerization".
-![Docker](https://www.docker.com/sites/default/files/d8/styles/large/public/2018-11/container-what-is-container.png sf)
+
 
 # Essentials: Images vs. Containers
 - Docker Image: An inert, immutable file that's essentially a snapshot of a container.
@@ -41,7 +41,8 @@ $ docker container ls --all
 
 To create a Docker Image, all you need is a `Dockerfile` with the env. configuration.
 
-```
+```console
+
 # Create an Image, using the Dockerfile
 $ docker build --tag=python-demo .
 
@@ -52,5 +53,39 @@ $ docker run -p 4000:80 python-demo
 # Dockerhub
 https://hub.docker.com/
 - A cloud-based repository for the Docker community to build and distribute container images.
-- Instead of building images, you can seek out official repos or take a chance with a random users  `repo`.
-- You can also register on Docker Hub and upload and
+- Instead of building images, you can seek out [official](https://hub.docker.com/_/mysql-enterprise-server) repos or take a chance with a user-created image.
+- You can also register on Docker Hub and upload your own images.
+- Only one private Repo allowed per account.
+
+```console
+
+# Login to Docker Hub
+$ docker login
+
+# Tag <image> for upload to registry
+$ docker tag image username/repository:tag
+
+# Upload tagged image to registry
+ $ docker push username/repository:tag
+
+# Run image from a registry
+$ docker run -p 4000:80 username/repository:tag
+
+```
+
+
+
+# Services w/DockerCompose
+- Services in Docker are defined as "containers in production."
+- E.g. DB server, compiler, etc. are all services.
+- `docker-compose.yml` makes it easy to run/scale your services.
+
+```
+
+# Run from Docker Compose
+$ docker-compose up
+
+# Stop w/Docker Compose
+$ docker-compose down
+
+```
